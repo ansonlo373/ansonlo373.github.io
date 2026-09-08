@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<!--
+  ┌────────────────────────────────────────────────────────────────────┐
+  │  BILINGUAL PORTFOLIO — quick edit guide                             │
+  │                                                                     │
+  │  Every piece of text exists twice: an English version marked        │
+  │  class="l-en" and a Japanese version marked class="l-ja".           │
+  │  The EN / 日本語 button top-right switches between them.            │
+  │                                                                     │
+  │  Search for  EDIT  to find the things to fill in:                   │
+  │    • your name (hero + footer + wordmark)                            │
+  │    • your email + GitHub + LinkedIn (contact section)                │
+  │                                                                     │
+  │  Everything else is already filled from your 職務経歴書.           │
+  │                                                                     │
+  │  Default language is English. To open in Japanese instead, change   │
+  │  <body class="... is-en">  to  is-ja  (and swap aria-pressed on     │
+  │  the two toggle buttons).                                            │
+  │                                                                     │
+  │  Go live: name your repo  <username>.github.io, add this file as    │
+  │  index.html, push.                                                   │
+  └────────────────────────────────────────────────────────────────────┘
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- EDIT: your name -->
+  <title>Your Name — Software Developer</title>
+  <meta name="description" content="Software developer working across computer vision, backend and front-end. Experience with systems for airport, government and education clients." />
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9673;</text></svg>" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg:       #0F1117;
+      --surface:  #191C24;
+      --ink:      #ECEEF3;
+      --ink-2:    #B7BCC9;
+      --muted:    #7C8294;
+      --line:     #262A34;
+      --accent:   #5661FF;
+      --accent-2: #6E77FF;
+      --on-accent:#FFFFFF;
+
+      --display: "Space Grotesk", "Noto Sans JP", system-ui, sans-serif;
+      --body:    "Inter", "Noto Sans JP", system-ui, sans-serif;
+      --mono:    "JetBrains Mono", ui-monospace, monospace;
+
+      --maxw: 1080px;
+      --pad:  clamp(1.25rem, 5vw, 3rem);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--body);
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* Japanese text reads better with a touch more line-height */
+    body.is-ja { line-height: 1.75; }
+
+    a { color: inherit; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding-inline: var(--pad); }
+
+    /* ---------- BILINGUAL SWITCH ---------- */
+    body.is-en .l-ja { display: none !important; }
+    body.is-ja .l-en { display: none !important; }
+
+    /* ---------- NAV ---------- */
+    .nav {
+      position: sticky; top: 0; z-index: 10;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: saturate(1.4) blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav__inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px; gap: 1rem;
+    }
+    .wordmark {
+      font-family: var(--mono); font-weight: 500; font-size: 0.95rem;
+      letter-spacing: -0.01em; text-decoration: none; white-space: nowrap;
+    }
+    .wordmark .caret { color: var(--accent); }
+    .nav__right { display: flex; align-items: center; gap: clamp(1rem, 4vw, 2rem); }
+    .nav__links { display: flex; gap: clamp(0.9rem, 3.5vw, 1.9rem); align-items: center; }
+    .nav__links a {
+      text-decoration: none; font-size: 0.95rem; color: var(--ink-2);
+      transition: color .15s ease;
+    }
+    .nav__links a:hover { color: var(--ink); }
+
+    /* language toggle */
+    .langtog {
+      display: inline-flex; border: 1px solid var(--line);
+      border-radius: 8px; overflow: hidden; background: var(--bg);
+    }
+    .langtog button {
+      font-family: var(--body); font-size: 0.82rem; font-weight: 500;
+      padding: 0.35rem 0.7rem; border: 0; background: transparent;
+      color: var(--muted); cursor: pointer; transition: background .15s, color .15s;
+    }
+    .langtog button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
+
+    /* ---------- HERO ---------- */
+    .hero { padding-block: clamp(3.5rem, 12vh, 8rem) clamp(3rem, 8vh, 5rem); }
+    .hero h1 {
+      font-family: var(--display); font-weight: 500;
+      font-size: clamp(2.4rem, 6.6vw, 4.7rem);
+      line-height: 1.05; letter-spacing: -0.03em;
+      margin: 0 0 1.4rem; max-width: 20ch;
+    }
+    body.is-ja .hero h1 { letter-spacing: -0.01em; line-height: 1.25; }
+    .hero h1 .mark {
+      background: linear-gradient(transparent 62%, color-mix(in srgb, var(--accent) 22%, transparent) 62%);
+      padding-inline: 0.05em;
+    }
+    .hero p.lede {
+      font-size: clamp(1.05rem, 2.1vw, 1.28rem);
+      color: var(--ink-2); max-width: 56ch; margin: 0 0 2.2rem;
+    }
+
+    .cta-row { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 3rem; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--body); font-size: 0.98rem; font-weight: 500;
+      padding: 0.7rem 1.25rem; border-radius: 10px; text-decoration: none;
+      border: 1px solid transparent;
+      transition: transform .12s ease, background .15s ease, border-color .15s ease;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn--primary { background: var(--accent); color: var(--on-accent); }
+    .btn--primary:hover { background: var(--accent-2); }
+    .btn--ghost { border-color: var(--line); color: var(--ink); background: var(--bg); }
+    .btn--ghost:hover { border-color: var(--ink-2); }
+
+    .status {
+      display: flex; flex-wrap: wrap; gap: 1.5rem 2.5rem;
+      padding-top: 1.75rem; border-top: 1px solid var(--line);
+      font-family: var(--mono); font-size: 0.82rem;
+    }
+    .status .field { display: flex; flex-direction: column; gap: 0.2rem; }
+    .status .k { color: var(--muted); }
+    .status .v { color: var(--ink); }
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%; background: #2FD196;
+      display: inline-block; margin-right: 0.45em;
+      box-shadow: 0 0 0 3px color-mix(in srgb, #2FD196 22%, transparent);
+    }
+
+    /* ---------- SECTIONS ---------- */
+    section { padding-block: clamp(3.5rem, 9vh, 6rem); }
+    .section-head {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 1rem; margin-bottom: 2.5rem; border-bottom: 1px solid var(--line);
+      padding-bottom: 1rem;
+    }
+    .section-head h2 {
+      font-family: var(--display); font-weight: 500;
+      font-size: clamp(1.4rem, 3.2vw, 2.1rem); letter-spacing: -0.02em; margin: 0;
+    }
+    .section-head .count { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); }
+
+    /* ---------- WORK ---------- */
+    .project { padding: 1.9rem 0; border-top: 1px solid var(--line); }
+    .project:last-child { border-bottom: 1px solid var(--line); }
+    .project__meta { font-family: var(--mono); font-size: 0.76rem; color: var(--muted); margin-bottom: 0.5rem; }
+    .project__title {
+      font-family: var(--display); font-weight: 500;
+      font-size: clamp(1.3rem, 2.6vw, 1.7rem); letter-spacing: -0.01em; margin: 0 0 0.6rem;
+    }
+    .project__desc { color: var(--ink-2); max-width: 66ch; margin: 0; }
+    .project__tech { display: flex; flex-wrap: wrap; gap: 0.4rem 0.5rem; margin-top: 0.9rem; }
+    .tag {
+      font-family: var(--mono); font-size: 0.74rem; color: var(--ink-2);
+      background: var(--surface); padding: 0.25rem 0.55rem; border-radius: 6px;
+    }
+    /* Add links to a project like this if you ever have a public URL:
+       <div class="project__links"><a href="...">Live</a></div> */
+    .project__links { display: flex; gap: 1.2rem; margin-top: 0.9rem; }
+    .project__links a {
+      font-size: 0.9rem; font-weight: 500; text-decoration: none; color: var(--accent);
+      border-bottom: 1px solid transparent; transition: border-color .15s ease;
+    }
+    .project__links a:hover { border-color: var(--accent); }
+
+    /* ---------- ABOUT ---------- */
+    .about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(2rem, 6vw, 4.5rem); }
+    .about-grid p { color: var(--ink-2); }
+    .about-grid p:first-child { margin-top: 0; }
+    .skills h3 { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin: 0 0 0.6rem; }
+    .skills + .skills { margin-top: 1.5rem; }
+    .skills ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skills li {
+      font-family: var(--mono); font-size: 0.82rem;
+      padding: 0.3rem 0.6rem; border: 1px solid var(--line); border-radius: 7px;
+    }
+    .skills.rows ul { flex-direction: column; gap: 0.35rem; }
+    .skills.rows li { border: 0; padding: 0; font-family: var(--body); font-size: 0.95rem; color: var(--ink-2); }
+
+    /* ---------- CONTACT ---------- */
+    .contact h2 {
+      font-family: var(--display); font-weight: 500;
+      font-size: clamp(1.8rem, 5vw, 3rem); letter-spacing: -0.02em; margin: 0 0 1rem; max-width: 18ch;
+    }
+    .contact p { color: var(--ink-2); max-width: 52ch; margin: 0 0 1.8rem; }
+    .contact__links { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+
+    footer {
+      border-top: 1px solid var(--line); padding-block: 2rem 3rem;
+      color: var(--muted); font-size: 0.85rem;
+      display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.75rem;
+    }
+    footer .wordmark { color: var(--muted); }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 680px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .nav__links { gap: 0.9rem; }
+    }
+
+    /* ---------- MOTION ---------- */
+    .reveal { opacity: 0; transform: translateY(14px); }
+    .loaded .reveal { opacity: 1; transform: none; transition: opacity .6s ease, transform .6s ease; }
+    .loaded .reveal:nth-child(1) { transition-delay: .05s; }
+    .loaded .reveal:nth-child(2) { transition-delay: .13s; }
+    .loaded .reveal:nth-child(3) { transition-delay: .21s; }
+    .loaded .reveal:nth-child(4) { transition-delay: .29s; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+
+<!-- Default language = English (is-en). Change to is-ja to open in Japanese. -->
+<body class="is-en">
+  <!-- ===================== NAV ===================== -->
+  <nav class="nav">
+    <div class="wrap nav__inner">
+      <!-- EDIT: your wordmark / handle -->
+      <a class="wordmark" href="#top">yourname<span class="caret">.dev</span></a>
+
+      <div class="nav__right">
+        <div class="nav__links">
+          <a href="#work"><span class="l-en">Work</span><span class="l-ja">実績</span></a>
+          <a href="#about"><span class="l-en">About</span><span class="l-ja">経歴</span></a>
+          <a href="#contact"><span class="l-en">Contact</span><span class="l-ja">連絡先</span></a>
+        </div>
+        <div class="langtog" role="group" aria-label="Language">
+          <button type="button" data-lang="en" aria-pressed="true">EN</button>
+          <button type="button" data-lang="ja" aria-pressed="false">日本語</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top" class="wrap">
+    <!-- ===================== HERO ===================== -->
+    <section class="hero">
+      <div class="reveal">
+        <!-- EDIT: nothing required, but you can reword these -->
+        <h1 class="l-en">Software developer specialising in <span class="mark">computer vision</span> and full-stack web development.</h1>
+        <h1 class="l-ja">コンピュータビジョンから<span class="mark">Web開発</span>まで、幅広く手がけるソフトウェアエンジニアです。</h1>
+      </div>
+
+      <div class="reveal">
+        <!-- EDIT: replace "Your Name" / お名前 -->
+        <p class="lede l-en">I'm <strong>Your Name</strong>, a software developer working across computer vision, backend and front-end development. I've delivered and maintained systems for airport, government and education clients, including one currently running at Hong Kong International Airport.</p>
+        <p class="lede l-ja"><strong>〇〇</strong>と申します。コンピュータビジョンからバックエンド、フロントエンドまで幅広く手がけるソフトウェアエンジニアです。空港・政府・教育など多様な分野でシステムの開発・保守を担当し、香港国際空港で稼働中のシステムの開発にも携わってまいりました。</p>
+      </div>
+
+      <div class="cta-row reveal">
+        <a class="btn btn--primary" href="#work"><span class="l-en">See my work</span><span class="l-ja">実績を見る</span></a>
+        <!-- EDIT: your email -->
+        <a class="btn btn--ghost" href="mailto:you@example.com"><span class="l-en">Email me</span><span class="l-ja">メールする</span></a>
+      </div>
+
+      <div class="status reveal">
+        <div class="field">
+          <span class="k"><span class="l-en">status</span><span class="l-ja">状況</span></span>
+          <span class="v"><span class="dot"></span><span class="l-en">Open to work</span><span class="l-ja">就職活動中</span></span>
+        </div>
+        <div class="field">
+          <span class="k"><span class="l-en">based in</span><span class="l-ja">拠点</span></span>
+          <span class="v"><span class="l-en">Japan</span><span class="l-ja">日本</span></span>
+        </div>
+        <div class="field">
+          <span class="k"><span class="l-en">focus</span><span class="l-ja">得意分野</span></span>
+          <span class="v"><span class="l-en">Computer Vision &middot; Full-stack</span><span class="l-ja">コンピュータビジョン・フルスタック</span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== WORK ===================== -->
+    <section id="work">
+      <div class="section-head">
+        <h2><span class="l-en">Selected work</span><span class="l-ja">主な実績</span></h2>
+        <span class="count"><span class="l-en">5 projects</span><span class="l-ja">全5件</span></span>
+      </div>
+
+      <!-- Project 1 -->
+      <article class="project">
+        <div class="project__meta">2024 – 2025</div>
+        <h3 class="project__title"><span class="l-en">In-vehicle computer vision system</span><span class="l-ja">車載型ビジュアル解析システム</span></h3>
+        <p class="project__desc l-en">Maintained and deployed the computer-vision models and APIs for a system that monitors occupant behaviour to improve safety and detection accuracy. Handled model fine-tuning, engine-to-ONNX conversion, and deployment to industrial PCs. Improved accuracy and detection speed, and set up rapid backup support to keep the system running during downtime. In operation at Hong Kong International Airport.</p>
+        <p class="project__desc l-ja">乗員の動作を監視し、安全性と検出精度を高めるコンピュータビジョンモデルとAPIの保守・デプロイを担当。モデルのファインチューニング、エンジン形式からONNX形式への変換、産業用PC（IPC）へのデプロイを実施。精度と検出速度を向上させ、稼働停止時にはバックアップ機器による迅速なサポート体制も構築。香港国際空港で運用中。</p>
+        <div class="project__tech">
+          <span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">Flask</span><span class="tag">ONNX</span><span class="tag">REST API</span><span class="tag">CVAT</span><span class="tag">FFmpeg</span><span class="tag">Linux</span><span class="tag">Git</span>
+        </div>
+      </article>
+
+      <!-- Project 2 -->
+      <article class="project">
+        <div class="project__meta">2025</div>
+        <h3 class="project__title"><span class="l-en">Airport patrol-car vision system</span><span class="l-ja">空港パトロールカー向けビジュアル解析システム</span></h3>
+        <p class="project__desc l-en">Provided technical support and data engineering for a vision system built into airport patrol cars that detects damaged road signs and obstacles. Handled data acquisition and format validation, model-deployment support, and video processing. Ran user acceptance testing after rollout and iterated on performance and accuracy.</p>
+        <p class="project__desc l-ja">空港パトロールカーに搭載され、破損した道路標識や障害物を検知するビジュアル解析システムの技術支援とデータ検証を担当。データ取得・フォーマット検証、モデルデプロイ支援、動画処理を実施。導入後はUAT（ユーザー受入テスト）を行い、パフォーマンスと精度を継続的に改善。</p>
+        <div class="project__tech">
+          <span class="tag">Python</span><span class="tag">FFmpeg</span><span class="tag">Strapi</span><span class="tag">Redis</span><span class="tag">MariaDB</span><span class="tag">Linux</span><span class="tag">Git</span>
+        </div>
+      </article>
+
+      <!-- Project 3 -->
+      <article class="project">
+        <div class="project__meta">2024 – 2025</div>
+        <h3 class="project__title"><span class="l-en">Government internal dashboard</span><span class="l-ja">政府部門向け内部管理ダッシュボード</span></h3>
+        <p class="project__desc l-en">Built a new dashboard to replace a legacy government internal system, with a React front-end and Java/SQL data services connected over a REST API. Focused on workflow efficiency and clear data visualisation, iterating through user acceptance testing.</p>
+        <p class="project__desc l-ja">既存の政府内部システムを刷新する新規ダッシュボードを開発。ReactによるフロントエンドとJava/SQLのデータ処理をREST APIで連携し、業務効率化とデータの可視化を実現。UATを通じて継続的に改善を実施。</p>
+        <div class="project__tech">
+          <span class="tag">React</span><span class="tag">JavaScript</span><span class="tag">Java</span><span class="tag">SQL Server</span><span class="tag">HTML/CSS</span><span class="tag">REST API</span><span class="tag">Linux</span><span class="tag">Git</span>
+        </div>
+      </article>
+
+      <!-- Project 4 -->
+      <article class="project">
+        <div class="project__meta">2025</div>
+        <h3 class="project__title"><span class="l-en">Legal document management system</span><span class="l-ja">法律業界向けドキュメント管理システム</span></h3>
+        <p class="project__desc l-en">Developed a document management system with version control and OCR for the legal sector. Implemented the user interface and OCR pipeline to digitise paper and PDF files, plus upload, classification and search features — improving search efficiency and data accuracy.</p>
+        <p class="project__desc l-ja">バージョン管理とOCR機能を備えた法律業界向けドキュメント管理システムを開発。UIとOCR処理、ファイルのアップロード・分類・検索機能を実装し、紙・PDF文書の電子化と検索効率・データ精度の向上を実現。</p>
+        <div class="project__tech">
+          <span class="tag">Java (GWT)</span><span class="tag">Tesseract OCR</span><span class="tag">CSS</span><span class="tag">MariaDB</span><span class="tag">Windows</span><span class="tag">Git</span>
+        </div>
+      </article>
+
+      <!-- Project 5 -->
+      <article class="project">
+        <div class="project__meta">2023 – 2025</div>
+        <h3 class="project__title"><span class="l-en">NGO online learning platform</span><span class="l-ja">NGO向けオンライン学習プラットフォーム</span></h3>
+        <p class="project__desc l-en">Led development of a WordPress-based e-learning platform supporting an NGO's education programmes. Built custom plugins and PHP APIs to improve content delivery and user management, handled database work, and kept the system running reliably with quick debugging.</p>
+        <p class="project__desc l-ja">NGOの教育活動を支援するWordPressベースのオンライン学習プラットフォームの開発を担当。カスタムプラグインとPHP APIを開発して学習コンテンツ配信とユーザー管理を改善。データベース処理や機能追加、迅速なデバッグ対応で安定運用と保守性向上に貢献。</p>
+        <div class="project__tech">
+          <span class="tag">PHP</span><span class="tag">WordPress</span><span class="tag">JavaScript</span><span class="tag">HTML/CSS</span><span class="tag">MariaDB</span><span class="tag">REST API</span><span class="tag">Apache</span><span class="tag">Linux</span>
+        </div>
+      </article>
+    </section>
+
+    <!-- ===================== ABOUT ===================== -->
+    <section id="about">
+      <div class="section-head">
+        <h2><span class="l-en">About</span><span class="l-ja">経歴</span></h2>
+      </div>
+      <div class="about-grid">
+        <div>
+          <p class="l-en">I'm a software developer with experience across computer vision, backend and front-end development, plus operations on Linux. I've delivered projects end to end — from design through implementation to maintenance — for airport, government and education clients.</p>
+          <p class="l-en">I speak Cantonese, Mandarin, English and Japanese, so I work comfortably in multinational teams, and a background in electronic engineering lets me bridge software and hardware. Above all, I care about writing readable, maintainable code.</p>
+          <p class="l-ja">コンピュータビジョン、バックエンド、フロントエンド、さらにLinux環境での運用まで幅広く対応してきたソフトウェアエンジニアです。空港・政府・教育など多様な分野のプロジェクトで、設計から実装・運用まで一貫して担当してきました。</p>
+          <p class="l-ja">広東語・中国語・英語・日本語を活かして多国籍なチームでも円滑に働け、電子工学の知識からソフトとハードの両面で課題解決に取り組めます。何よりも「読みやすく、保守しやすいコード」を大切にしています。</p>
+        </div>
+        <div>
+          <div class="skills">
+            <h3><span class="l-en">Languages</span><span class="l-ja">言語</span></h3>
+            <ul>
+              <li>Python</li><li>Java</li><li>JavaScript</li><li>PHP</li><li>HTML/CSS</li><li>SQL</li><li>C++</li>
+            </ul>
+          </div>
+          <div class="skills">
+            <h3><span class="l-en">Frameworks</span><span class="l-ja">フレームワーク</span></h3>
+            <ul>
+              <li>React</li><li>Flask</li><li>WordPress</li><li>GWT</li><li>Strapi</li>
+            </ul>
+          </div>
+          <div class="skills">
+            <h3><span class="l-en">Tools</span><span class="l-ja">ツール</span></h3>
+            <ul>
+              <li>OpenCV</li><li>ONNX</li><li>FFmpeg</li><li>Tesseract</li><li>CVAT</li><li>Redis</li><li>Git</li><li>Docker</li>
+            </ul>
+          </div>
+          <div class="skills">
+            <h3><span class="l-en">Databases</span><span class="l-ja">データベース</span></h3>
+            <ul>
+              <li>MariaDB</li><li>SQL Server</li>
+            </ul>
+          </div>
+          <div class="skills rows">
+            <h3><span class="l-en">Spoken languages</span><span class="l-ja">語学</span></h3>
+            <ul>
+              <li><span class="l-en">Cantonese — Native</span><span class="l-ja">広東語 — ネイティブ</span></li>
+              <li><span class="l-en">Mandarin — Business</span><span class="l-ja">中国語 — ビジネス会話</span></li>
+              <li><span class="l-en">English — Business (TOEIC 780)</span><span class="l-ja">英語 — ビジネス会話（TOEIC 780）</span></li>
+              <li><span class="l-en">Japanese — JLPT N2</span><span class="l-ja">日本語 — JLPT N2</span></li>
+            </ul>
+          </div>
+          <div class="skills rows">
+            <h3><span class="l-en">Certifications</span><span class="l-ja">資格</span></h3>
+            <ul>
+              <li><span class="l-en">JLPT N2 (Dec 2024)</span><span class="l-ja">日本語能力試験 N2（2024年12月）</span></li>
+              <li><span class="l-en">TOEIC 780 (2026)</span><span class="l-ja">TOEIC 780（2026年）</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CONTACT ===================== -->
+    <section id="contact" class="contact">
+      <h2><span class="l-en">Let's work together.</span><span class="l-ja">一緒に働きましょう。</span></h2>
+      <p class="l-en">I'm looking for software development roles in Japan and open to freelance work. Email is the fastest way to reach me.</p>
+      <p class="l-ja">日本国内でのソフトウェア開発の職を探しており、フリーランスのご相談も歓迎です。ご連絡はメールが一番早く届きます。</p>
+      <div class="contact__links">
+        <!-- EDIT: all three links -->
+        <a class="btn btn--primary" href="mailto:you@example.com">you@example.com</a>
+        <a class="btn btn--ghost" href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn btn--ghost" href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <span class="wordmark">yourname<span class="caret">.dev</span></span>
+    <!-- EDIT: your name -->
+    <span>© 2026 Your Name.</span>
+  </footer>
+
+  <script>
+    // One page-load reveal
+    requestAnimationFrame(() => document.body.classList.add('loaded'));
+
+    // Language toggle
+    const buttons = document.querySelectorAll('.langtog button');
+    function setLang(lang) {
+      document.body.classList.toggle('is-en', lang === 'en');
+      document.body.classList.toggle('is-ja', lang === 'ja');
+      document.documentElement.lang = lang;
+      buttons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+    }
+    buttons.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+  </script>
+</body>
+</html>
